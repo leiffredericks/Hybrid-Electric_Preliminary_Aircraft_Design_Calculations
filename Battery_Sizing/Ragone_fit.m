@@ -7,6 +7,7 @@
 %% Dependencies: ragone_datasets.mat |                                   %%
 %% Process Data from Existing Ragone Plots and Print Fit Curve           %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+ load('ragone_datasets.mat')
 
 %% Output Switches
 PLTLG   =   1; % Plot Log Plots Individually on 1 Graph
@@ -92,8 +93,11 @@ ylim([0 3])
 title('Comparative Log Scale Ragone Plots')
 plot(ptscale, t3pt6s, ptscale, t36s, ptscale, t360s, ptscale, t1h, ...
     ptscale, t10h, ptscale, t100h)
+plot(log10(XRANGE1),log10(FIT(XRANGE1)),'r')
+plot(log10(XRANGE1),log10(HPFIT(XRANGE1)),'k')
+plot(log10(XRANGE1),log10(LPFIT(XRANGE1)),'b')
 legend('DICMIL', 'ECSDL','SCIENCEDIRECT','SAGE','3.6','36','360','1h',...
-    '10h','100h')
+    '10h','100h','FULL FIT','HP FIT','LPFIT')
 hold off
 end
 % Plot Each Individually Directly
@@ -117,7 +121,7 @@ legend('DICMIL', 'ECSDL','SCIENCEDIRECT','SAGE','FULL FIT','HP FIT',...
 ylim([0 200])
 hold off
 end
-% Plot Full Dataset
+% Plot Full Dataset with PolyFit (Not Recommended)
 if (FULL == 1)
 figure
 hold on
@@ -129,7 +133,7 @@ ylim([0 2.45])
 xlim([0 5])
 hold off
 end
-% Plot High Power Dataset
+% Plot High Power Dataset with PolyFit (Not Recommended)
 if (HP == 1)
 figure
 hold on
